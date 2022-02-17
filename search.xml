@@ -4,6 +4,245 @@
   
     
     <entry>
+      <title>Vue 中添加 lottie 动画</title>
+      <link href="/2022/02/17/Vue-%E4%B8%AD%E6%B7%BB%E5%8A%A0-lottie-%E5%8A%A8%E7%94%BB/"/>
+      <url>/2022/02/17/Vue-%E4%B8%AD%E6%B7%BB%E5%8A%A0-lottie-%E5%8A%A8%E7%94%BB/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1、修改前"><a href="#1、修改前" class="headerlink" title="1、修改前"></a>1、修改前</h1><p><img src="/static/attach/20220214/2206cccdcd4a49a19ffa7475f60b87a5.png"></p><h1 id="2、在vue中引入lottie"><a href="#2、在vue中引入lottie" class="headerlink" title="2、在vue中引入lottie"></a>2、在vue中引入lottie</h1><pre><code>npm install --save vue-lottie</code></pre><h1 id="3、全局引入-vue-lottie"><a href="#3、全局引入-vue-lottie" class="headerlink" title="3、全局引入 vue-lottie"></a>3、全局引入 vue-lottie</h1><p>在 main.js 引入并注册全局组件即可，当然你也可以局部引入，我用的局部引入</p><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lottie <span class="keyword">from</span> <span class="string">&#x27;vue-lottie&#x27;</span>; </span><br><span class="line"></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">component</span>(<span class="string">&#x27;lottie&#x27;</span>, lottie)</span><br></pre></td></tr></table></figure><h1 id="4、引入你的-lottie-资源"><a href="#4、引入你的-lottie-资源" class="headerlink" title="4、引入你的 lottie 资源"></a>4、引入你的 lottie 资源</h1><p>用相关里面的代码</p><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//相关 star</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> animationData  <span class="keyword">from</span> <span class="string">&quot;@/assets/errorJSON/404.json&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Lottie</span> <span class="keyword">from</span> <span class="string">&#x27;vue-lottie&#x27;</span></span><br><span class="line"><span class="comment">//相关 end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Exception404&#x27;</span>,</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">//相关 star</span></span><br><span class="line">  <span class="attr">components</span>:&#123;<span class="title class_">Lottie</span>&#125;,</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="comment">//其中 animationData.default 是重点，之前看了好多网上教程都是没有加这个，就没有做成功，加上 default 就好了</span></span><br><span class="line">      <span class="attr">defaultOptions</span>: &#123; <span class="attr">animationData</span>: animationData.<span class="property">default</span> &#125;,</span><br><span class="line">      <span class="attr">animationSpeed</span>: <span class="number">4</span>,</span><br><span class="line">      <span class="attr">anim</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">methods</span>: &#123;</span><br><span class="line">    <span class="attr">handleAnimation</span>: <span class="keyword">function</span>(<span class="params">anim</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">anim</span> = anim;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(anim); <span class="comment">//这里可以看到 lottie 对象的全部属性</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line"> <span class="comment">//相关 end</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">  <span class="attr">computed</span>: &#123;</span><br><span class="line">    <span class="title function_">classes</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> [</span><br><span class="line">        <span class="string">&#x27;ele-exception ele-text-center&#x27;</span>,</span><br><span class="line">        &#123;<span class="string">&#x27;ele-exception-dark&#x27;</span>: <span class="variable language_">this</span>.<span class="property">$store</span>.<span class="property">state</span>.<span class="property">theme</span>.<span class="property">darkMode</span>&#125;</span><br><span class="line">      ];</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;  </span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure><h1 id="5、结果"><a href="#5、结果" class="headerlink" title="5、结果"></a>5、结果</h1><p><img src="https://img-blog.csdnimg.cn/20210413113926936.gif#pic_center"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Vue </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Vue </tag>
+            
+            <tag> lottie </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>如何把部署到服务器上的springboot项目持续在后台运行(旧版)</title>
+      <link href="/2022/02/17/%E5%A6%82%E4%BD%95%E6%8A%8A%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84springboot%E9%A1%B9%E7%9B%AE%E6%8C%81%E7%BB%AD%E5%9C%A8%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C-%E6%97%A7%E7%89%88/"/>
+      <url>/2022/02/17/%E5%A6%82%E4%BD%95%E6%8A%8A%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84springboot%E9%A1%B9%E7%9B%AE%E6%8C%81%E7%BB%AD%E5%9C%A8%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C-%E6%97%A7%E7%89%88/</url>
+      
+        <content type="html"><![CDATA[<h1 id="后台持续运行项目"><a href="#后台持续运行项目" class="headerlink" title="后台持续运行项目"></a>后台持续运行项目</h1><p>部署发布自己的springboot项目时可以通过</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">java -jar 项目名.jar</span><br></pre></td></tr></table></figure><p>让它在服务器上运行，但一旦断开ssh连接，项目就会停止运行，这样我们就不能访问我们发布的项目了，如果只为了运行一个项目我们还得用一台电脑一直挂着，这显然是不合理的，不现实的。</p><p>我们可以通过nohup来实现关掉ssh连接后项目还是会在服务器上运行。</p><ul><li>输入命令<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">nohup java -jar 项目名.jar &amp;</span><br></pre></td></tr></table></figure>回车之后会显示进程号，这个进程号就是你的项目后台运行的进程号。</li></ul><p>nohup: 不挂断的执行命令，忽略所有的挂断信号。 运行后台命令 最后加 &amp;<br>在jar目录下会生成一个nohup.out文件，默认的log输出到这里了</p><p>下面的命令表示<br>· 不挂断的后台启动 demo.jar，<br>· “2&gt;&amp;1” 表示 错误和输出都传到nohup.out文件中，默认状态只把输出输出到nohup.out文件中<br>· nohup 命令默认输出到nohup.out文件中</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">nohup java -jar demo.jar &gt;./log.txt  <span class="number">2</span>&gt;&amp;<span class="number">1</span> &amp;</span><br></pre></td></tr></table></figure><h1 id="关闭后台已运行的项目"><a href="#关闭后台已运行的项目" class="headerlink" title="关闭后台已运行的项目"></a>关闭后台已运行的项目</h1><ul><li>先找到自己项目的进程id<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ps -aux | grep 项目名</span><br></pre></td></tr></table></figure><img src="https://img-blog.csdnimg.cn/20210506163123646.png"></li></ul><h1 id="杀死进程"><a href="#杀死进程" class="headerlink" title="杀死进程"></a>杀死进程</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">kill <span class="number">9</span> 进程id</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> springboot </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Springboot中PageHelper 分页查询使用方法</title>
+      <link href="/2022/02/17/Springboot%E4%B8%ADPageHelper-%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+      <url>/2022/02/17/Springboot%E4%B8%ADPageHelper-%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<h3 id="一：导入依赖"><a href="#一：导入依赖" class="headerlink" title="一：导入依赖"></a>一：导入依赖</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;pagehelper-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;<span class="number">1.2</span><span class="number">.13</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure><h3 id="二：配置yml文件中PageHelper的属性"><a href="#二：配置yml文件中PageHelper的属性" class="headerlink" title="二：配置yml文件中PageHelper的属性"></a>二：配置yml文件中PageHelper的属性</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">pagehelper:                #分页插件</span><br><span class="line">  helper-dialect: mysql</span><br><span class="line">  reasonable: <span class="literal">true</span></span><br><span class="line">  support-methods-arguments: <span class="literal">true</span></span><br><span class="line">  params:</span><br></pre></td></tr></table></figure><h3 id="三：在controller类中使用，"><a href="#三：在controller类中使用，" class="headerlink" title="三：在controller类中使用，"></a>三：在controller类中使用，</h3><h5 id="1-在查询方法上调用PageHelper-startPage-方法，设置分页的页数和每页信息数，"><a href="#1-在查询方法上调用PageHelper-startPage-方法，设置分页的页数和每页信息数，" class="headerlink" title="1.在查询方法上调用PageHelper.startPage()方法，设置分页的页数和每页信息数，"></a>1.在查询方法上调用PageHelper.startPage()方法，设置分页的页数和每页信息数，</h5><h5 id="2-将查询出来的结果集用PageInfo的构造函数初始化为一个分页结果对象"><a href="#2-将查询出来的结果集用PageInfo的构造函数初始化为一个分页结果对象" class="headerlink" title="2.将查询出来的结果集用PageInfo的构造函数初始化为一个分页结果对象"></a>2.将查询出来的结果集用PageInfo的构造函数初始化为一个分页结果对象</h5><h5 id="3-将分页结果对象存入model，返回前端页面"><a href="#3-将分页结果对象存入model，返回前端页面" class="headerlink" title="3.将分页结果对象存入model，返回前端页面"></a>3.将分页结果对象存入model，返回前端页面</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/types&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">types</span><span class="params">(<span class="meta">@RequestParam(required = false,defaultValue = &quot;1&quot;,value = &quot;pagenum&quot;)</span><span class="type">int</span> pagenum, Model model)</span>&#123;</span><br><span class="line"></span><br><span class="line">    PageHelper.startPage(pagenum, <span class="number">5</span>);  <span class="comment">//pagenum：页数，pagesize:每页的信息数</span></span><br><span class="line">    </span><br><span class="line">    List&lt;Type&gt; allType = typeService.getAllType(); <span class="comment">//调用业务层查询方法</span></span><br><span class="line">    </span><br><span class="line">    PageInfo&lt;Type&gt; pageInfo = <span class="keyword">new</span> <span class="title class_">PageInfo</span>&lt;&gt;(allType); <span class="comment">//得到分页结果对象</span></span><br><span class="line">    </span><br><span class="line">    model.addAttribute(<span class="string">&quot;pageInfo&quot;</span>, pageInfo);  <span class="comment">//携带分页结果信息</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;admin/types&quot;</span>;  <span class="comment">//回到前端展示页面</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="四：前端展示分页（thymeleaf-semantic-ui）-这里ui用自己的就行，比如bootstrap或layui，主要是thymeleaf的使用。"><a href="#四：前端展示分页（thymeleaf-semantic-ui）-这里ui用自己的就行，比如bootstrap或layui，主要是thymeleaf的使用。" class="headerlink" title="四：前端展示分页（thymeleaf+semantic-ui）,这里ui用自己的就行，比如bootstrap或layui，主要是thymeleaf的使用。"></a>四：前端展示分页（thymeleaf+semantic-ui）,这里ui用自己的就行，比如bootstrap或layui，主要是thymeleaf的使用。</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;table  class=<span class="string">&quot;ui compact celled teal table&quot;</span>&gt;</span><br><span class="line">  &lt;thead&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;th&gt;&lt;/th&gt;</span><br><span class="line">    &lt;th&gt;名称&lt;/th&gt;</span><br><span class="line">    &lt;th&gt;操作&lt;/th&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">  &lt;/thead&gt;</span><br><span class="line">  &lt;tbody&gt;</span><br><span class="line">  &lt;tr th:each=<span class="string">&quot;type, iterStat : $&#123;pageInfo.list&#125;&quot;</span>&gt;</span><br><span class="line">    &lt;td th:text=<span class="string">&quot;$&#123;iterStat.count&#125;&quot;</span>&gt;<span class="number">1</span>&lt;/td&gt;</span><br><span class="line">    &lt;td th:text=<span class="string">&quot;$&#123;type.name&#125;&quot;</span>&gt;摸鱼方法&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;</span><br><span class="line">      &lt;a href=<span class="string">&quot;#&quot;</span> th:href=<span class="string">&quot;@&#123;/admin/types/&#123;id&#125;/input(id=$&#123;type.id&#125;)&#125;&quot;</span> class=<span class="string">&quot;ui mini teal basic button&quot;</span>&gt;编辑&lt;/a&gt;</span><br><span class="line">      &lt;a href=<span class="string">&quot;#&quot;</span> th:href=<span class="string">&quot;@&#123;/admin/types/&#123;id&#125;/delete(id=$&#123;type.id&#125;)&#125;&quot;</span> class=<span class="string">&quot;ui mini red basic button&quot;</span>&gt;删除&lt;/a&gt;</span><br><span class="line">    &lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">  &lt;/tbody&gt;</span><br><span class="line">  &lt;tfoot&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;th colspan=<span class="string">&quot;7&quot;</span>&gt;</span><br><span class="line">      &lt;div class=<span class="string">&quot;ui mini pagination menu&quot;</span>  &gt;</span><br><span class="line">        &lt;div class=<span class="string">&quot;item&quot;</span>&gt;&lt;a th:href=<span class="string">&quot;@&#123;/admin/types&#125;&quot;</span>&gt;首页&lt;/a&gt;&lt;/div&gt;</span><br><span class="line">        &lt;div class=<span class="string">&quot;item&quot;</span>&gt;&lt;a th:href=<span class="string">&quot;@&#123;/admin/types(pagenum=$&#123;pageInfo.hasPreviousPage&#125;?$&#123;pageInfo.prePage&#125;:1)&#125;&quot;</span>&gt;上一页&lt;/a&gt;&lt;/div&gt;</span><br><span class="line">        &lt;div class=<span class="string">&quot;item&quot;</span>&gt;&lt;a th:href=<span class="string">&quot;@&#123;/admin/types(pagenum=$&#123;pageInfo.hasNextPage&#125;?$&#123;pageInfo.nextPage&#125;:$&#123;pageInfo.pages&#125;)&#125;&quot;</span>&gt;下一页&lt;/a&gt;&lt;/div&gt;</span><br><span class="line">        &lt;div class=<span class="string">&quot;item&quot;</span>&gt;&lt;a th:href=<span class="string">&quot;@&#123;/admin/types(pagenum=$&#123;pageInfo.pages&#125;)&#125;&quot;</span>&gt;尾页&lt;/a&gt;&lt;/div&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">      &lt;a href=<span class="string">&quot;#&quot;</span> th:href=<span class="string">&quot;@&#123;/admin/types/input&#125;&quot;</span> class=<span class="string">&quot;ui mini right floated teal basic button&quot;</span>&gt;新增&lt;/a&gt;</span><br><span class="line">    &lt;/th&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">  &lt;/tfoot&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=<span class="string">&quot;ui segment m-inline-block&quot;</span>&gt;</span><br><span class="line">  &lt;p &gt;当前第&lt;span th:text=<span class="string">&quot;$&#123;pageInfo.pageNum&#125;&quot;</span>&gt;&lt;/span&gt;页，总&lt;span th:text=<span class="string">&quot;$&#123;pageInfo.pages&#125;&quot;</span>&gt;&lt;/span&gt;页，共&lt;span th:text=<span class="string">&quot;$&#123;pageInfo.total&#125;&quot;</span>&gt;&lt;/span&gt;条记录&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure><h3 id="五：效果展示（pagesize设置为5的效果）"><a href="#五：效果展示（pagesize设置为5的效果）" class="headerlink" title="五：效果展示（pagesize设置为5的效果）"></a>五：效果展示（pagesize设置为5的效果）</h3><p><img src="https://img-blog.csdnimg.cn/20200310105006168.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyODA0NzM2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> springboot </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> springboot </tag>
+            
+            <tag> maven </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>SpringCloud学习笔记</title>
+      <link href="/2022/02/17/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <url>/2022/02/17/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<p><a href="https://www.kuangstudy.com/bbs/1374942542566551554" title="Springcloud在线学习笔记">Springcloud在线学习笔记</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 微服务 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> springcloud </tag>
+            
+            <tag> 分布式 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux常用三种软件安装方式及服务器基本环境搭建</title>
+      <link href="/2022/02/17/Linux%E5%B8%B8%E7%94%A8%E4%B8%89%E7%A7%8D%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F%E5%8F%8A%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+      <url>/2022/02/17/Linux%E5%B8%B8%E7%94%A8%E4%B8%89%E7%A7%8D%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F%E5%8F%8A%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+      
+        <content type="html"><![CDATA[<h3 id="jdk安装（rpm安装）"><a href="#jdk安装（rpm安装）" class="headerlink" title="jdk安装（rpm安装）"></a>jdk安装（rpm安装）</h3><p>1、rpmjdk下载地址<br><a href="https://repo.huaweicloud.com/java/jdk/">https://repo.huaweicloud.com/java/jdk/</a></p><p>2、如果有安装openjdk 则卸载</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@kuangshen ~]<span class="comment"># java -version</span></span><br><span class="line">java version <span class="string">&quot;1.8.0_121&quot;</span></span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_121-b13)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.121-b13, mixed mode)</span><br><span class="line"><span class="comment"># 检查</span></span><br><span class="line">[root@kuangshen ~]<span class="comment"># rpm -qa|grep jdk</span></span><br><span class="line">jdk1.8.0_121-1.8.0_121-fcs.x86_64</span><br><span class="line"><span class="comment"># 卸载 -e --nodeps 强制删除</span></span><br><span class="line">[root@kuangshen ~]<span class="comment"># rpm -e --nodeps jdk1.8.0_121-1.8.0_121-fcs.x86_64</span></span><br><span class="line">[root@kuangshen ~]<span class="comment"># java -version</span></span><br><span class="line">-bash: /usr/bin/java: No such file or directory  <span class="comment"># OK</span></span><br><span class="line"></span><br></pre></td></tr></table></figure><p>3、安装JDK</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装java rpm</span></span><br><span class="line">[root@kuangshen kuangshen]<span class="comment"># rpm -ivh jdk-8u221-linux-x64.rpm</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装完成后配置环境变量 文件：/etc/profile</span></span><br><span class="line">JAVA_HOME=/usr/java/jdk1.8.0_221-amd64</span><br><span class="line">CLASSPATH=%JAVA_HOME%/lib:%JAVA_HOME%/jre/lib</span><br><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$JAVA_HOME</span>/jre/bin</span><br><span class="line"><span class="built_in">export</span> PATH CLASSPATH JAVA_HOME</span><br><span class="line"><span class="comment"># 保存退出</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 让新增的环境变量生效！</span></span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试 java -version</span></span><br><span class="line">[root@kuangshen java]<span class="comment"># java -version</span></span><br><span class="line">java version <span class="string">&quot;1.8.0_221&quot;</span></span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_221-b11)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.221-b11, mixed mode)</span><br></pre></td></tr></table></figure><h3 id="Tomcat安装（解压缩安装）"><a href="#Tomcat安装（解压缩安装）" class="headerlink" title="Tomcat安装（解压缩安装）"></a>Tomcat安装（解压缩安装）</h3><p>1、安装好了Java环境后我们可以测试下Tomcat！准备好Tomcat的安装包！</p><p>2、将文件移动到&#x2F;usr&#x2F;tomcat&#x2F;下，并解压！</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@kuangshen kuangshen]<span class="comment"># mv apache-tomcat-9.0.22.tar.gz /usr</span></span><br><span class="line">[root@kuangshen kuangshen]<span class="comment"># cd /usr</span></span><br><span class="line">[root@kuangshen usr]<span class="comment"># ls</span></span><br><span class="line">apache-tomcat-9.0.22.tar.gz</span><br><span class="line">[root@kuangshen usr]<span class="comment"># tar -zxvf apache-tomcat-9.0.22.tar.gz   # 解压</span></span><br></pre></td></tr></table></figure><p>3、运行Tomcat，进入bin目录，和我们以前在Windows下看的都是一样的</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 执行：startup.sh --&gt;启动tomcat</span></span><br><span class="line"><span class="comment"># 执行：shutdown.sh --&gt;关闭tomcat</span></span><br><span class="line">./startup.sh</span><br><span class="line">./shutdown.sh</span><br></pre></td></tr></table></figure><p>4、确保Linux的防火墙端口是开启的，如果是阿里云，需要保证阿里云的安全组策略是开放的！</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看firewall服务状态</span></span><br><span class="line">systemctl status firewalld</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启、重启、关闭、firewalld.service服务</span></span><br><span class="line"><span class="comment"># 开启</span></span><br><span class="line">service firewalld start</span><br><span class="line"><span class="comment"># 重启</span></span><br><span class="line">service firewalld restart</span><br><span class="line"><span class="comment"># 关闭</span></span><br><span class="line">service firewalld stop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看防火墙规则</span></span><br><span class="line">firewall-cmd --list-all    <span class="comment"># 查看全部信息</span></span><br><span class="line">firewall-cmd --list-ports  <span class="comment"># 只看端口信息</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启端口</span></span><br><span class="line">开端口命令：firewall-cmd --zone=public --add-port=80/tcp --permanent</span><br><span class="line">重启防火墙：systemctl restart firewalld.service</span><br><span class="line"></span><br><span class="line">命令含义：</span><br><span class="line">--zone <span class="comment">#作用域</span></span><br><span class="line">--add-port=80/tcp  <span class="comment">#添加端口，格式为：端口/通讯协议</span></span><br><span class="line">--permanent   <span class="comment">#永久生效，没有此参数重启后失效</span></span><br></pre></td></tr></table></figure><h3 id="安装Docker（yum安装）"><a href="#安装Docker（yum安装）" class="headerlink" title="安装Docker（yum安装）"></a>安装Docker（yum安装）</h3><blockquote><p>基于 CentOS 7 安装</p></blockquote><ol><li><p>官网安装参考手册：<a href="https://docs.docker.com/install/linux/docker-ce/centos/">https://docs.docker.com/install/linux/docker-ce/centos/</a></p></li><li><p>确定你是CentOS7及以上版本</p></li></ol> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@192 Desktop]<span class="comment"># cat /etc/redhat-release</span></span><br><span class="line">CentOS Linux release 7.2.1511 (Core)</span><br></pre></td></tr></table></figure><ol start="3"><li>yum安装gcc相关（需要确保 虚拟机可以上外网 ）</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install gcc</span><br><span class="line">yum -y install gcc-c++</span><br></pre></td></tr></table></figure><ol start="4"><li><p>卸载旧版本</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y remove docker docker-common docker-selinux docker-engine</span><br><span class="line">  <span class="comment"># 官网版本</span></span><br><span class="line">  yum remove docker \</span><br><span class="line">            docker-client \</span><br><span class="line">            docker-client-latest \</span><br><span class="line">            docker-common \</span><br><span class="line">            docker-latest \</span><br><span class="line">            docker-latest-logrotate \</span><br><span class="line">            docker-logrotate \</span><br><span class="line">            docker-engine</span><br></pre></td></tr></table></figure></li><li><p>安装需要的软件包</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure></li><li><p>设置stable镜像仓库</p></li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 错误</span></span><br><span class="line">  yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br><span class="line">  <span class="comment">## 报错</span></span><br><span class="line">  [Errno 14] curl<span class="comment">#35 - TCP connection reset by peer</span></span><br><span class="line">  [Errno 12] curl<span class="comment">#35 - Timeout</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 正确推荐使用国内的</span></span><br><span class="line">  yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure><ol start="7"><li>更新yum软件包索引</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure><ol start="8"><li>安装Docker CE</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure><ol start="9"><li><p>启动docker</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure></li><li><p>测试</p></li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker version</span><br><span class="line">   </span><br><span class="line">   docker run hello-world</span><br><span class="line">   </span><br><span class="line">   docker images</span><br></pre></td></tr></table></figure><p>​    </p><h3 id="宝塔面板安装"><a href="#宝塔面板安装" class="headerlink" title="宝塔面板安装"></a>宝塔面板安装</h3><p><a href="https://www.bt.cn/bbs/thread-19376-1-1.html">https://www.bt.cn/bbs/thread-19376-1-1.html</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CentOS </tag>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>解决windows系统80端口被占用问题</title>
+      <link href="/2022/02/17/%E8%A7%A3%E5%86%B3windows%E7%B3%BB%E7%BB%9F80%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A8%E9%97%AE%E9%A2%98/"/>
+      <url>/2022/02/17/%E8%A7%A3%E5%86%B3windows%E7%B3%BB%E7%BB%9F80%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A8%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>80端口被 system (pid&#x3D;4) 系统占用的解决方法，80端口占用后服务器无法运行</p></blockquote><p>80端口一般被当做网页服务器的默认端口，使用本机搭建服务器环境的时候，都会默认使用80端口来作为网页访问端，但是有的时候80端口会被其他的不明身份的程序占用，导致 Apache 启动失败，修改 Apache 的默认端口后访问本机地址又非常麻烦。下面介绍一下如果80端口被占用后应该如何处理。</p><h2 id="查找80端口被谁占用的方法"><a href="#查找80端口被谁占用的方法" class="headerlink" title="查找80端口被谁占用的方法"></a>查找80端口被谁占用的方法</h2><p>进入命令提示行（开始运行输入 CMD），输入命令 <code>netstat -ano|findstr 80</code> (显示包含:80的网络连接) ，就可以看到本机所有端口的使用情况，一般80端口在第一行，截图显示，端口已经被占用，PID 中写明 LISTENING 4。</p><p><img src="https://images2018.cnblogs.com/blog/1469487/201808/1469487-20180821213237670-1716102239.png"></p><p>PID&#x3D;4 的程序是哪一个呢？接着在命令提示和下输入指令 <code>tasklist</code> ，列出所有当前运行的进程，<br>发现 PID&#x3D;4 的进程，居然是 system 。</p><p><img src="https://images2018.cnblogs.com/blog/1469487/201808/1469487-20180821213250217-1448364720.png"></p><ul><li>扩展：也可以通过任务管理器查看PID：<br><img src="https://images2018.cnblogs.com/blog/1469487/201808/1469487-20180821213259751-392434541.png"></li></ul><p><img src="https://images2018.cnblogs.com/blog/1469487/201808/1469487-20180821213309210-517669532.png"></p><h2 id="取消-system-进程对80端口的占用"><a href="#取消-system-进程对80端口的占用" class="headerlink" title="取消 system 进程对80端口的占用"></a>取消 system 进程对80端口的占用</h2><p>系统占用的端口一般都是微软官方的产品占用的。所以这个时候主要考虑到几个服务：</p><ol><li>SQL Server导致。其中很有可能是SQL Server Reporting Services (MSSQLSERVER)，它是 SQL Server 的日志系统。</li><li>IIS 服务。如果你电脑安装了这个，很有可能它在运行着，那么它就占用着80端口</li></ol><p>当然如果都不是这两个原因的话，可以使用下下面的解决方法</p><h3 id="关闭方式"><a href="#关闭方式" class="headerlink" title="关闭方式"></a>关闭方式</h3><p>关闭方法很简单，在运行框中输入 <code>services.msc</code> ，进入服务窗口。或者直接在开始菜单里面的搜索框中输入“服务”即可打开。然后找到 <code>SQL Server Reporting Services (MSSQLSERVER)</code> 这个服务，然后停止，被占用的80端口就被释放出来了。你也可以设置它的启动方式为“禁用”。<br><img src="https://images2018.cnblogs.com/blog/1469487/201808/1469487-20180821213323251-2058397571.png"></p><blockquote><p>对于iis的服务也可以用此方法解决</p></blockquote><h3 id="关闭方式二-针对还是没办法解决的"><a href="#关闭方式二-针对还是没办法解决的" class="headerlink" title="关闭方式二(针对还是没办法解决的)"></a>关闭方式二(针对还是没办法解决的)</h3><ol><li>使用管理员身份运行 cmd</li><li><code>net stop http</code> &#x2F;&#x2F;停止系统http服务</li><li><code>sc config http start= disabled</code> &#x2F;&#x2F;禁用服务的自动启动，此处注意等号后面的空格不可少</li></ol><p><img src="https://images2018.cnblogs.com/blog/1469487/201808/1469487-20180822204642355-1166069719.png"></p><p>这个时候80端口就会被释放，你可以重启你的应用程序啦</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 端口 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> Windows </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Nginx快速入门</title>
+      <link href="/2022/02/17/Nginx%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"/>
+      <url>/2022/02/17/Nginx%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</url>
+      
+        <content type="html"><![CDATA[<p><a href="https://blog.csdn.net/qq_45408390/article/details/119457559" title="点击查看">点击查看</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Nginx </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 反向代理 </tag>
+            
+            <tag> Nginx </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>如何解决failed to push some refs to git</title>
+      <link href="/2022/02/17/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3failed-to-push-some-refs-to-git/"/>
+      <url>/2022/02/17/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3failed-to-push-some-refs-to-git/</url>
+      
+        <content type="html"><![CDATA[<h6 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h6><h6 id="在使用git-对源代码进行push到gitHub时可能会出错"><a href="#在使用git-对源代码进行push到gitHub时可能会出错" class="headerlink" title="在使用git 对源代码进行push到gitHub时可能会出错"></a>在使用git 对源代码进行push到gitHub时可能会出错</h6><h6 id="此时很多人会尝试下面的命令把当前分支代码上传到master分支上。"><a href="#此时很多人会尝试下面的命令把当前分支代码上传到master分支上。" class="headerlink" title="此时很多人会尝试下面的命令把当前分支代码上传到master分支上。"></a>此时很多人会尝试下面的命令把当前分支代码上传到master分支上。</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure><p>但依然没能解决问题</p><h6 id="出现错误的主要原因是github中的README-md文件不在本地代码目录中"><a href="#出现错误的主要原因是github中的README-md文件不在本地代码目录中" class="headerlink" title="出现错误的主要原因是github中的README.md文件不在本地代码目录中"></a>出现错误的主要原因是github中的README.md文件不在本地代码目录中</h6><h6 id="可以通过如下命令进行代码合并【注：pull-x3D-fetch-merge"><a href="#可以通过如下命令进行代码合并【注：pull-x3D-fetch-merge" class="headerlink" title="可以通过如下命令进行代码合并【注：pull&#x3D;fetch+merge]"></a>可以通过如下命令进行代码合并【注：pull&#x3D;fetch+merge]</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull --rebase origin master</span><br></pre></td></tr></table></figure><h6 id="执行上面代码后可以看到本地代码库中多了README-md文件"><a href="#执行上面代码后可以看到本地代码库中多了README-md文件" class="headerlink" title="执行上面代码后可以看到本地代码库中多了README.md文件"></a>执行上面代码后可以看到本地代码库中多了README.md文件</h6><h6 id="此时再执行如下语句即可完成代码上传到github"><a href="#此时再执行如下语句即可完成代码上传到github" class="headerlink" title="此时再执行如下语句即可完成代码上传到github"></a>此时再执行如下语句即可完成代码上传到github</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 避坑 </tag>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>端口占用排查</title>
+      <link href="/2022/02/17/%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%E6%8E%92%E6%9F%A5/"/>
+      <url>/2022/02/17/%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%E6%8E%92%E6%9F%A5/</url>
+      
+        <content type="html"><![CDATA[<p>首先按住 win + R ，输入 cmd ，回车</p><p><strong>查看端口占用情况</strong></p><p>使用 netstat -ano|findstr 命令查看</p><p>比如我想看 8080 端口的占用情况</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">netstat -ano|findstr &quot;8080&quot;</span><br></pre></td></tr></table></figure><p><img src="https://img2018.cnblogs.com/i-beta/1491349/201912/1491349-20191203135144320-1063615737.png"></p><p>可以看到如上，1388 就是就是进程的 id，也就是pid</p><p><strong>通过 pid 查找相应程序</strong></p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tasklist|findstr &quot;1388&quot;</span><br></pre></td></tr></table></figure><p><img src="https://img2018.cnblogs.com/i-beta/1491349/201912/1491349-20191203135626121-529094445.png"></p><p><strong>结束进程</strong></p><p>通过进程名  </p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">taskkill /f /t /im chrome.exe</span><br></pre></td></tr></table></figure><p>通过pid     </p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">taskkill /f /pid 1388</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>MyBatis-Plus学习笔记</title>
       <link href="/2022/02/17/MyBatis-Plus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
       <url>/2022/02/17/MyBatis-Plus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
