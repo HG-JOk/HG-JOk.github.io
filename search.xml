@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>博客技术总结</title>
+      <link href="/2022/02/18/%E5%8D%9A%E5%AE%A2%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/"/>
+      <url>/2022/02/18/%E5%8D%9A%E5%AE%A2%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<h2 id="1-技术介绍"><a href="#1-技术介绍" class="headerlink" title="1.技术介绍"></a>1.技术介绍</h2><p>前端：vue + vuex + vue-router + axios + vuetify + element + echarts</p><p>后端：SpringBoot + nginx  + SpringSecurity + Swagger2 + MyBatisPlus + Mysql + Redis + elasticsearch + rabbitMQ + MaxWell</p><h2 id="2-运行环境"><a href="#2-运行环境" class="headerlink" title="2.运行环境"></a>2.运行环境</h2><p>开发工具：IDEA</p><p>服务器：腾讯1核2G CentOS8.0以上</p><p>对象存储：腾讯云OSS</p><p>全站cdn加速、</p><p>cos对象储存</p><p>全站https</p><h2 id="4-项目总结"><a href="#4-项目总结" class="headerlink" title="4.项目总结"></a>4.项目总结</h2><p>此次对博客进行了全方位的升级，前端技术点和后端技术点相比第一，二版提升了不少。</p><p>加入了许多动画过渡效果，并考虑到了一些用户细节（深色模式，图片预览，等），评论加入了表情和分页，提升了用户体验，。后台文章编辑器换为MarkDown，语法更加简洁，新增了草稿箱和自动保存文章等功能。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 项目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 前端 </tag>
+            
+            <tag> 后端 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Vue 中添加 lottie 动画</title>
       <link href="/2022/02/17/Vue-%E4%B8%AD%E6%B7%BB%E5%8A%A0-lottie-%E5%8A%A8%E7%94%BB/"/>
       <url>/2022/02/17/Vue-%E4%B8%AD%E6%B7%BB%E5%8A%A0-lottie-%E5%8A%A8%E7%94%BB/</url>
