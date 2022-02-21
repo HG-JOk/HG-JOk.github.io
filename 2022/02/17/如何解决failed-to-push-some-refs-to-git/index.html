@@ -159,32 +159,43 @@
 
   }
 }
-window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
-  function initValine () {
-    const valine = new Valine(Object.assign({
-      el: '#vcomment',
-      appId: 'SLNrRoC4hoQsgSpN1GA4kYCf-gzGzoHsz',
-      appKey: 'MEH0dqIGamLIvjhxmBhjPcaT',
-      avatar: 'monsterid',
-      serverURLs: '',
-      emojiMaps: "",
-      path: window.location.pathname,
-      visitor: true,
-    }, null))
-  }
-
-  if (typeof Valine === 'function') initValine() 
-  else getScript('https://cdn.jsdelivr.net/gh/HCLonely/Valine@latest/dist/Valine.min.js').then(initValine)
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/gh/HCLonely/Valine@latest/dist/Valine.min.js"></script><script>var requestSetting = function (from,set) {
+  var from = from
+  var setting = set.split(',').filter(function(item){
+  return from.indexOf(item) > -1
+  });
+  setting = setting.length == 0 ? from :setting;
+  return setting
 }
 
-if ('Valine' === 'Valine' || !false) {
-  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
-  else setTimeout(loadValine, 0)
-} else {
-  function loadOtherComment () {
-    loadValine()
-  }
-}</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+var guestInfo = requestSetting(['nick','mail','link'],'')
+var requiredFields = requestSetting(['nick','mail','link'],'nick,mail')
+let friends = '4c3f14189d1ab8a370fbabaca5f48392'.split(',')
+let master = '4bce6af808a69331caab9a88e4a46849'.split(',')
+let tagMeta = '博主,小伙伴,访客'.split(',')
+
+window.valine = new Valine({
+  el:'#vcomment',
+  appId: 'SLNrRoC4hoQsgSpN1GA4kYCf-gzGzoHsz',
+  appKey: 'MEH0dqIGamLIvjhxmBhjPcaT',
+  notify: false,
+  verify: false,
+  placeholder: '',
+  avatar: 'monsterid',
+  meta: guestInfo,
+  pageSize: '',
+  lang: 'zh-CN',
+  recordIP: '',
+  serverURLs: '',
+  emojiCDN: '',
+  emojiMaps: "",
+  enableQQ: true,
+  requiredFields: requiredFields,
+  master: master,
+  friends: friends,
+  tagMeta: tagMeta,
+  metaPlaceholder: "白天收到的评论我会立刻收到,请尽情评论吧"
+});</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
 POWERMODE.shake = false;
 POWERMODE.mobile = false;
 document.body.addEventListener('input', POWERMODE);
