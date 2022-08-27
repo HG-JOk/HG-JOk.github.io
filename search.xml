@@ -218,33 +218,6 @@
     
     
     <entry>
-      <title>如何解决failed to push some refs to git</title>
-      <link href="/2022/02/17/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3failed-to-push-some-refs-to-git/"/>
-      <url>/2022/02/17/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3failed-to-push-some-refs-to-git/</url>
-      
-        <content type="html"><![CDATA[<h6 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h6><h6 id="在使用git-对源代码进行push到gitHub时可能会出错"><a href="#在使用git-对源代码进行push到gitHub时可能会出错" class="headerlink" title="在使用git 对源代码进行push到gitHub时可能会出错"></a>在使用git 对源代码进行push到gitHub时可能会出错</h6><h6 id="此时很多人会尝试下面的命令把当前分支代码上传到master分支上。"><a href="#此时很多人会尝试下面的命令把当前分支代码上传到master分支上。" class="headerlink" title="此时很多人会尝试下面的命令把当前分支代码上传到master分支上。"></a>此时很多人会尝试下面的命令把当前分支代码上传到master分支上。</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure><p>但依然没能解决问题</p><h6 id="出现错误的主要原因是github中的README-md文件不在本地代码目录中"><a href="#出现错误的主要原因是github中的README-md文件不在本地代码目录中" class="headerlink" title="出现错误的主要原因是github中的README.md文件不在本地代码目录中"></a>出现错误的主要原因是github中的README.md文件不在本地代码目录中</h6><h6 id="可以通过如下命令进行代码合并【注：pull-x3D-fetch-merge"><a href="#可以通过如下命令进行代码合并【注：pull-x3D-fetch-merge" class="headerlink" title="可以通过如下命令进行代码合并【注：pull&#x3D;fetch+merge]"></a>可以通过如下命令进行代码合并【注：pull&#x3D;fetch+merge]</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull --rebase origin master</span><br></pre></td></tr></table></figure><h6 id="执行上面代码后可以看到本地代码库中多了README-md文件"><a href="#执行上面代码后可以看到本地代码库中多了README-md文件" class="headerlink" title="执行上面代码后可以看到本地代码库中多了README.md文件"></a>执行上面代码后可以看到本地代码库中多了README.md文件</h6><h6 id="此时再执行如下语句即可完成代码上传到github"><a href="#此时再执行如下语句即可完成代码上传到github" class="headerlink" title="此时再执行如下语句即可完成代码上传到github"></a>此时再执行如下语句即可完成代码上传到github</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      <categories>
-          
-          <category> git </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 避坑 </tag>
-            
-            <tag> git </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>延时任务-基于netty时间轮算法实现</title>
       <link href="/2022/02/17/%E5%BB%B6%E6%97%B6%E4%BB%BB%E5%8A%A1-%E5%9F%BA%E4%BA%8Enetty%E6%97%B6%E9%97%B4%E8%BD%AE%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/"/>
       <url>/2022/02/17/%E5%BB%B6%E6%97%B6%E4%BB%BB%E5%8A%A1-%E5%9F%BA%E4%BA%8Enetty%E6%97%B6%E9%97%B4%E8%BD%AE%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/</url>
@@ -264,6 +237,33 @@
             <tag> netty </tag>
             
             <tag> 定时任务 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>如何解决failed to push some refs to git</title>
+      <link href="/2022/02/17/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3failed-to-push-some-refs-to-git/"/>
+      <url>/2022/02/17/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3failed-to-push-some-refs-to-git/</url>
+      
+        <content type="html"><![CDATA[<h6 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h6><h6 id="在使用git-对源代码进行push到gitHub时可能会出错"><a href="#在使用git-对源代码进行push到gitHub时可能会出错" class="headerlink" title="在使用git 对源代码进行push到gitHub时可能会出错"></a>在使用git 对源代码进行push到gitHub时可能会出错</h6><h6 id="此时很多人会尝试下面的命令把当前分支代码上传到master分支上。"><a href="#此时很多人会尝试下面的命令把当前分支代码上传到master分支上。" class="headerlink" title="此时很多人会尝试下面的命令把当前分支代码上传到master分支上。"></a>此时很多人会尝试下面的命令把当前分支代码上传到master分支上。</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure><p>但依然没能解决问题</p><h6 id="出现错误的主要原因是github中的README-md文件不在本地代码目录中"><a href="#出现错误的主要原因是github中的README-md文件不在本地代码目录中" class="headerlink" title="出现错误的主要原因是github中的README.md文件不在本地代码目录中"></a>出现错误的主要原因是github中的README.md文件不在本地代码目录中</h6><h6 id="可以通过如下命令进行代码合并【注：pull-x3D-fetch-merge"><a href="#可以通过如下命令进行代码合并【注：pull-x3D-fetch-merge" class="headerlink" title="可以通过如下命令进行代码合并【注：pull&#x3D;fetch+merge]"></a>可以通过如下命令进行代码合并【注：pull&#x3D;fetch+merge]</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull --rebase origin master</span><br></pre></td></tr></table></figure><h6 id="执行上面代码后可以看到本地代码库中多了README-md文件"><a href="#执行上面代码后可以看到本地代码库中多了README-md文件" class="headerlink" title="执行上面代码后可以看到本地代码库中多了README.md文件"></a>执行上面代码后可以看到本地代码库中多了README.md文件</h6><h6 id="此时再执行如下语句即可完成代码上传到github"><a href="#此时再执行如下语句即可完成代码上传到github" class="headerlink" title="此时再执行如下语句即可完成代码上传到github"></a>此时再执行如下语句即可完成代码上传到github</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 避坑 </tag>
+            
+            <tag> git </tag>
             
         </tags>
       
