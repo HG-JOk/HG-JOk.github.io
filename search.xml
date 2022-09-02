@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>如何优雅的进行判空</title>
+      <link href="/2022/09/02/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E8%BF%9B%E8%A1%8C%E5%88%A4%E7%A9%BA/"/>
+      <url>/2022/09/02/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E8%BF%9B%E8%A1%8C%E5%88%A4%E7%A9%BA/</url>
+      
+        <content type="html"><![CDATA[<h1 id="如何优雅的进行判空"><a href="#如何优雅的进行判空" class="headerlink" title="如何优雅的进行判空"></a>如何优雅的进行判空</h1><p>我想大家在开发过程中遇到最多的问题便是NullPointerException即空指针异常了吧，空指针异常一般分为以下几种情况：</p><ol><li>object对象为null，为null的情况大多数都是上一步的查询方法没有查到结果，此时通过object来get其中的属性的时候会报异常</li><li>对象集合为空，然后get(0)或者遍历的时候没有获取到对象</li><li>字段值为null，此时又拿次字段去做比较还是什么，也会报异常</li></ol><p>现在对常见情况进行详解</p><ul><li>对象为空的话我们常用的就是以下方式jdk的util包里的方法</li></ul><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Objects.isNull(obj)</span><br><span class="line">Objects.nonNull(obj)</span><br><span class="line">obj != <span class="type">null</span></span><br><span class="line"><span class="variable">obj</span> <span class="operator">=</span>= <span class="literal">null</span></span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure><ul><li>集合为空的话最常用的就是Spring里带的方法</li></ul><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">CollectionUtils.isEmpty(list)</span><br><span class="line">list.size() &gt; <span class="number">0</span></span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure><ul><li>字段值为null的时候常用的是</li></ul><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Strings.isBlank(str)</span><br><span class="line">StringUtil.isEmpty(str)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure><p>前两种判空我就不做讲解了，下面就是着重讲一下第三种关于一些字段的判空</p><p>一般字段为空判断的都是String类型，或者数据库字段设置默认值为null或者空字符串 这个时候我们需要对字符串做处理，例如进行正则匹配什么的，如果是null或者是空字符串的话就会有问题，有一小部分人可能习惯了isEmpty方法，但是这种情况会很容易出现空字符串的问题，这个时候系统就会报异常了。下面我来给大家看一下两个方法的区别：</p><p><strong>1.Strings.isBlank(str)</strong>  –org.apache.logging.log4j.util 包</p><p><img src="G:\hexo\myblog\source_posts\如何优雅的进行判空\1.png"></p><p> 我们可以看到方法底层有两种判断方式，前面的就是我们常见的等于null判断，后面的方法我们先看一下trim()方法： <img src="G:\hexo\myblog\source_posts\如何优雅的进行判空\2.png"></p><p> 源码具体的作用也是对字符串的前后部分的空格做了处理，删除了字符串最前面和尾部的空格，将中间的字符串包含空格(这个空格不是前面或者后面的空格)返回。 将字符串进行trim()方法处理空格后便进行isEmpty()方法处理了:</p><p><img src="G:\hexo\myblog\source_posts\如何优雅的进行判空\3.png"></p><p> <strong>2.StringUtilS.isEmpty(str)</strong>  —org.apache.commons.lang3 包</p><p><img src="G:\hexo\myblog\source_posts\如何优雅的进行判空\Joker4.png" alt="img">编辑 此时我们看一下apache的lang包下的判空少了个空格的处理， 由此可见我们以后再对字符串类型的字段处理的时候应该使用哪个方法都一清二楚了吧。</p><p>再补充一点：我们很多系统中都会有很多过滤条件，例如单号或者什么的也有很多是string类型的，我们在后台接收参数的时候可以先通过trim()方法将操作人误操作的前后空格给处理掉，然后再将处理后的参数放到筛选条件中进行筛选，这样保证用户的体验性。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 实用工具 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>博客技术总结</title>
       <link href="/2022/02/18/%E5%8D%9A%E5%AE%A2%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/"/>
       <url>/2022/02/18/%E5%8D%9A%E5%AE%A2%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/</url>
@@ -218,33 +237,6 @@
     
     
     <entry>
-      <title>延时任务-基于netty时间轮算法实现</title>
-      <link href="/2022/02/17/%E5%BB%B6%E6%97%B6%E4%BB%BB%E5%8A%A1-%E5%9F%BA%E4%BA%8Enetty%E6%97%B6%E9%97%B4%E8%BD%AE%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/"/>
-      <url>/2022/02/17/%E5%BB%B6%E6%97%B6%E4%BB%BB%E5%8A%A1-%E5%9F%BA%E4%BA%8Enetty%E6%97%B6%E9%97%B4%E8%BD%AE%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/</url>
-      
-        <content type="html"><![CDATA[<h1 id="延时任务-基于netty时间轮算法实现"><a href="#延时任务-基于netty时间轮算法实现" class="headerlink" title="延时任务-基于netty时间轮算法实现"></a>延时任务-基于netty时间轮算法实现</h1><ul><li>一、时间轮算法简介</li><li>二、时间轮hello-world</li><li>三、异步任务线程池</li><li>四、时间轮优缺点</li></ul><h2 id="一、时间轮算法简介"><a href="#一、时间轮算法简介" class="headerlink" title="一、时间轮算法简介"></a><strong>一、时间轮算法简介</strong></h2><p>为了大家能够理解下文中的代码，我们先来简单了解一下netty时间轮算法的核心原理时间轮算法</p><p><img src="https://pics6.baidu.com/feed/b7fd5266d0160924dd4500ce2b16e7f0e7cd349b.png?token=115494fd12c8443c5cfcd18f519b5c2a"></p><p>名副其实，时间轮就是一个环形的数据结构，类似于表盘，将时间轮分成多个bucket(比如：0-8)。假设每个时间轮轮片的分隔时间段tickDuration&#x3D;1s（即：指针经过每个格子花费时间是 1 s），当前的时间bucket&#x3D;3，那么在18秒后需要被执行的任务需要落到（（3+18）%8&#x3D;5取余运算)的5号bucket上。假如有多个需要在该时间段内执行的任务，就会组成一个双向链表。另外针对时间轮我们要有下面的几个认知：</p><ul><li>时间轮指针是一个Worker线程，在时间轮整点的时候执行双向链表中的任务。</li><li>时间轮算法的并不是精准的延时，它的执行精度取决于每个时间轮轮片的分隔时间段tickDuration</li><li>Worker线程是单线程，一个bucket、一个bucket的顺序处理任务。<strong>「所以我们的延时任务一定要做成异步任务，否则会影响时间轮后续任务的执行时间。」</strong></li></ul><h2 id="二、时间轮hello-world"><a href="#二、时间轮hello-world" class="headerlink" title="二、时间轮hello-world"></a><strong>二、时间轮hello-world</strong></h2><p>实现一个延时任务的例子，需求仍然十分的简单：你买了一张火车票，必须在30分钟之内付款，否则该订单被自动取消。<strong>「订单30分钟不付款自动取消，这个任务就是一个延时任务。」</strong> 我们的火车票订单取消任务，从需求上看并不需要非常精准的延时，所以是可以使用时间轮算法来完成这个任务的。</p><p>首先通过maven坐标引入netty</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.netty&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;netty-all&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.1.45.Final&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure><p>然后我们创建一个时间轮，如果是Spring的开发环境，我们可以这么做。下文中我们new了一个包含512个bucket的时间轮，每个时间轮的轮片时间间隔是100毫秒。</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean(&quot;hashedWheelTimer&quot;)</span></span><br><span class="line"><span class="keyword">public</span> HashedWheelTimer <span class="title function_">hashedWheelTimer</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">HashedWheelTimer</span>(<span class="number">100</span>, TimeUnit.MILLISECONDS, <span class="number">512</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>举例：当用户买火车票下单的时候，向时间轮中添加一个30分钟的延时任务。延时任务将在30分钟之后被执行，下文的lambda表达式部分实现了一个TimerTask(task)延时任务。这个延时任务的函数体内，请一定使用异步任务，即：单独起一个线程或者使用SpringBoot异步任务线程池。因为Worker线程是单线程的，你的任务处理时间长于tickDuration会妨碍后续时间轮轮片上的任务的执行。</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//订单下单操作</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">order</span><span class="params">(String orderInfo)</span> &#123;</span><br><span class="line">  <span class="comment">//下单的时候，向时间轮中添加一个30分钟的延时任务</span></span><br><span class="line">  hashedWheelTimer.newTimeout(task -&gt; &#123;</span><br><span class="line">    <span class="comment">//注意这里使用异步任务线程池或者开启线程进行订单取消任务的处理</span></span><br><span class="line">    cancelOrder(orderInfo);</span><br><span class="line">  &#125;, <span class="number">30</span>, TimeUnit.MINUTES);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="三、异步任务线程池"><a href="#三、异步任务线程池" class="headerlink" title="三、异步任务线程池"></a><strong>三、异步任务线程池</strong></h2><p>我们在上文中已经多次强调，时间轮的任务TimerTask的执行内容要做成异步的。最简单的做法就是接到一个任务之后启动一个线程处理该任务。在Spring环境下其实我们有更好的选择，就是使用Spring的线程池，这个线程池是可以自定义的。比如：下文中的用法是我事先定义了一个名字为test的线程池，然后通过@Async使用即可。</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Async(&quot;test&quot;)</span><br><span class="line">public void cancelOrder(String orderInfo)&#123;</span><br><span class="line">  //查询订单支付信息，如果用户未支付，关闭订单</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>可能有的朋友，还不知道该如何自定义一个Spring线程池，可以参考：源代码地址：<a href="https://gitee.com/hanxt/zimug-monitor-threadpool">https://gitee.com/hanxt/zimug-monitor-threadpool</a>  。</p><h2 id="四、时间轮优缺点"><a href="#四、时间轮优缺点" class="headerlink" title="四、时间轮优缺点"></a><strong>四、时间轮优缺点</strong></h2><p>时间轮算法实现延时任务的优点就是，相对于使用JDK的DelayQueue，其算法上具有优势，执行性能相对好一些。其缺点就是所有的延时任务以及延时触发的管理，都是在单个应用服务的内存中进行的，一旦该应用服务发生故障重启服务，时间轮任务数据将全部丢失。这一缺点和DelayQueue是一样的。为了解决这个问题，我们可以使用redis、RocketMQ等分布式中间件来管理延时任务消息的方式来实现延时任务</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 算法 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> netty </tag>
-            
-            <tag> 定时任务 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>如何解决failed to push some refs to git</title>
       <link href="/2022/02/17/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3failed-to-push-some-refs-to-git/"/>
       <url>/2022/02/17/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3failed-to-push-some-refs-to-git/</url>
@@ -264,6 +256,33 @@
             <tag> 避坑 </tag>
             
             <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>延时任务-基于netty时间轮算法实现</title>
+      <link href="/2022/02/17/%E5%BB%B6%E6%97%B6%E4%BB%BB%E5%8A%A1-%E5%9F%BA%E4%BA%8Enetty%E6%97%B6%E9%97%B4%E8%BD%AE%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/"/>
+      <url>/2022/02/17/%E5%BB%B6%E6%97%B6%E4%BB%BB%E5%8A%A1-%E5%9F%BA%E4%BA%8Enetty%E6%97%B6%E9%97%B4%E8%BD%AE%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="延时任务-基于netty时间轮算法实现"><a href="#延时任务-基于netty时间轮算法实现" class="headerlink" title="延时任务-基于netty时间轮算法实现"></a>延时任务-基于netty时间轮算法实现</h1><ul><li>一、时间轮算法简介</li><li>二、时间轮hello-world</li><li>三、异步任务线程池</li><li>四、时间轮优缺点</li></ul><h2 id="一、时间轮算法简介"><a href="#一、时间轮算法简介" class="headerlink" title="一、时间轮算法简介"></a><strong>一、时间轮算法简介</strong></h2><p>为了大家能够理解下文中的代码，我们先来简单了解一下netty时间轮算法的核心原理时间轮算法</p><p><img src="https://pics6.baidu.com/feed/b7fd5266d0160924dd4500ce2b16e7f0e7cd349b.png?token=115494fd12c8443c5cfcd18f519b5c2a"></p><p>名副其实，时间轮就是一个环形的数据结构，类似于表盘，将时间轮分成多个bucket(比如：0-8)。假设每个时间轮轮片的分隔时间段tickDuration&#x3D;1s（即：指针经过每个格子花费时间是 1 s），当前的时间bucket&#x3D;3，那么在18秒后需要被执行的任务需要落到（（3+18）%8&#x3D;5取余运算)的5号bucket上。假如有多个需要在该时间段内执行的任务，就会组成一个双向链表。另外针对时间轮我们要有下面的几个认知：</p><ul><li>时间轮指针是一个Worker线程，在时间轮整点的时候执行双向链表中的任务。</li><li>时间轮算法的并不是精准的延时，它的执行精度取决于每个时间轮轮片的分隔时间段tickDuration</li><li>Worker线程是单线程，一个bucket、一个bucket的顺序处理任务。<strong>「所以我们的延时任务一定要做成异步任务，否则会影响时间轮后续任务的执行时间。」</strong></li></ul><h2 id="二、时间轮hello-world"><a href="#二、时间轮hello-world" class="headerlink" title="二、时间轮hello-world"></a><strong>二、时间轮hello-world</strong></h2><p>实现一个延时任务的例子，需求仍然十分的简单：你买了一张火车票，必须在30分钟之内付款，否则该订单被自动取消。<strong>「订单30分钟不付款自动取消，这个任务就是一个延时任务。」</strong> 我们的火车票订单取消任务，从需求上看并不需要非常精准的延时，所以是可以使用时间轮算法来完成这个任务的。</p><p>首先通过maven坐标引入netty</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.netty&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;netty-all&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.1.45.Final&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure><p>然后我们创建一个时间轮，如果是Spring的开发环境，我们可以这么做。下文中我们new了一个包含512个bucket的时间轮，每个时间轮的轮片时间间隔是100毫秒。</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean(&quot;hashedWheelTimer&quot;)</span></span><br><span class="line"><span class="keyword">public</span> HashedWheelTimer <span class="title function_">hashedWheelTimer</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">HashedWheelTimer</span>(<span class="number">100</span>, TimeUnit.MILLISECONDS, <span class="number">512</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>举例：当用户买火车票下单的时候，向时间轮中添加一个30分钟的延时任务。延时任务将在30分钟之后被执行，下文的lambda表达式部分实现了一个TimerTask(task)延时任务。这个延时任务的函数体内，请一定使用异步任务，即：单独起一个线程或者使用SpringBoot异步任务线程池。因为Worker线程是单线程的，你的任务处理时间长于tickDuration会妨碍后续时间轮轮片上的任务的执行。</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//订单下单操作</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">order</span><span class="params">(String orderInfo)</span> &#123;</span><br><span class="line">  <span class="comment">//下单的时候，向时间轮中添加一个30分钟的延时任务</span></span><br><span class="line">  hashedWheelTimer.newTimeout(task -&gt; &#123;</span><br><span class="line">    <span class="comment">//注意这里使用异步任务线程池或者开启线程进行订单取消任务的处理</span></span><br><span class="line">    cancelOrder(orderInfo);</span><br><span class="line">  &#125;, <span class="number">30</span>, TimeUnit.MINUTES);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="三、异步任务线程池"><a href="#三、异步任务线程池" class="headerlink" title="三、异步任务线程池"></a><strong>三、异步任务线程池</strong></h2><p>我们在上文中已经多次强调，时间轮的任务TimerTask的执行内容要做成异步的。最简单的做法就是接到一个任务之后启动一个线程处理该任务。在Spring环境下其实我们有更好的选择，就是使用Spring的线程池，这个线程池是可以自定义的。比如：下文中的用法是我事先定义了一个名字为test的线程池，然后通过@Async使用即可。</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Async(&quot;test&quot;)</span><br><span class="line">public void cancelOrder(String orderInfo)&#123;</span><br><span class="line">  //查询订单支付信息，如果用户未支付，关闭订单</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>可能有的朋友，还不知道该如何自定义一个Spring线程池，可以参考：源代码地址：<a href="https://gitee.com/hanxt/zimug-monitor-threadpool">https://gitee.com/hanxt/zimug-monitor-threadpool</a>  。</p><h2 id="四、时间轮优缺点"><a href="#四、时间轮优缺点" class="headerlink" title="四、时间轮优缺点"></a><strong>四、时间轮优缺点</strong></h2><p>时间轮算法实现延时任务的优点就是，相对于使用JDK的DelayQueue，其算法上具有优势，执行性能相对好一些。其缺点就是所有的延时任务以及延时触发的管理，都是在单个应用服务的内存中进行的，一旦该应用服务发生故障重启服务，时间轮任务数据将全部丢失。这一缺点和DelayQueue是一样的。为了解决这个问题，我们可以使用redis、RocketMQ等分布式中间件来管理延时任务消息的方式来实现延时任务</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> netty </tag>
+            
+            <tag> 定时任务 </tag>
             
         </tags>
       
