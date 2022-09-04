@@ -8,7 +8,7 @@
       <link href="/2022/09/02/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E8%BF%9B%E8%A1%8C%E5%88%A4%E7%A9%BA/"/>
       <url>/2022/09/02/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E8%BF%9B%E8%A1%8C%E5%88%A4%E7%A9%BA/</url>
       
-        <content type="html"><![CDATA[<h1 id="如何优雅的进行判空"><a href="#如何优雅的进行判空" class="headerlink" title="如何优雅的进行判空"></a>如何优雅的进行判空</h1><p>我想大家在开发过程中遇到最多的问题便是NullPointerException即空指针异常了吧，空指针异常一般分为以下几种情况：</p><ol><li>object对象为null，为null的情况大多数都是上一步的查询方法没有查到结果，此时通过object来get其中的属性的时候会报异常</li><li>对象集合为空，然后get(0)或者遍历的时候没有获取到对象</li><li>字段值为null，此时又拿次字段去做比较还是什么，也会报异常</li></ol><p>现在对常见情况进行详解</p><ul><li>对象为空的话我们常用的就是以下方式jdk的util包里的方法</li></ul><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Objects.isNull(obj)</span><br><span class="line">Objects.nonNull(obj)</span><br><span class="line">obj != <span class="type">null</span></span><br><span class="line"><span class="variable">obj</span> <span class="operator">=</span>= <span class="literal">null</span></span><br></pre></td></tr></table></figure><ul><li>集合为空的话最常用的就是Spring里带的方法</li></ul><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">CollectionUtils.isEmpty(list)</span><br><span class="line">list.size() &gt; <span class="number">0</span></span><br></pre></td></tr></table></figure><ul><li>字段值为null的时候常用的是</li></ul><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Strings.isBlank(str)</span><br><span class="line">StringUtil.isEmpty(str)</span><br></pre></td></tr></table></figure><p>前两种判空我就不做讲解了，下面就是着重讲一下第三种关于一些字段的判空</p><p>一般字段为空判断的都是String类型，或者数据库字段设置默认值为null或者空字符串 这个时候我们需要对字符串做处理，例如进行正则匹配什么的，如果是null或者是空字符串的话就会有问题，有一小部分人可能习惯了isEmpty方法，但是这种情况会很容易出现空字符串的问题，这个时候系统就会报异常了。下面我来给大家看一下两个方法的区别：</p><p><strong>1.Strings.isBlank(str)</strong>  –org.apache.logging.log4j.util 包</p><p><img src="G:\hexo\myblog\source_posts\如何优雅的进行判空\1.png"></p><p> 我们可以看到方法底层有两种判断方式，前面的就是我们常见的等于null判断，后面的方法我们先看一下trim()方法： <img src="G:\hexo\myblog\source_posts\如何优雅的进行判空\2.png"></p><p> 源码具体的作用也是对字符串的前后部分的空格做了处理，删除了字符串最前面和尾部的空格，将中间的字符串包含空格(这个空格不是前面或者后面的空格)返回。 将字符串进行trim()方法处理空格后便进行isEmpty()方法处理了:</p><p><img src="G:\hexo\myblog\source_posts\如何优雅的进行判空\3.png"></p><p> <strong>2.StringUtilS.isEmpty(str)</strong>  —org.apache.commons.lang3 包</p><p><img src="G:\hexo\myblog\source_posts\如何优雅的进行判空\Joker4.png" alt="img">编辑 此时我们看一下apache的lang包下的判空少了个空格的处理， 由此可见我们以后再对字符串类型的字段处理的时候应该使用哪个方法都一清二楚了吧。</p><p>再补充一点：我们很多系统中都会有很多过滤条件，例如单号或者什么的也有很多是string类型的，我们在后台接收参数的时候可以先通过trim()方法将操作人误操作的前后空格给处理掉，然后再将处理后的参数放到筛选条件中进行筛选，这样保证用户的体验性。</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="如何优雅的进行判空"><a href="#如何优雅的进行判空" class="headerlink" title="如何优雅的进行判空"></a>如何优雅的进行判空</h1><p>我想大家在开发过程中遇到最多的问题便是NullPointerException即空指针异常了吧，空指针异常一般分为以下几种情况：</p><ol><li>object对象为null，为null的情况大多数都是上一步的查询方法没有查到结果，此时通过object来get其中的属性的时候会报异常</li><li>对象集合为空，然后get(0)或者遍历的时候没有获取到对象</li><li>字段值为null，此时又拿次字段去做比较还是什么，也会报异常</li></ol><p>现在对常见情况进行详解</p><ul><li>对象为空的话我们常用的就是以下方式jdk的util包里的方法</li></ul><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Objects.isNull(obj)</span><br><span class="line">Objects.nonNull(obj)</span><br><span class="line">obj != <span class="type">null</span></span><br><span class="line"><span class="variable">obj</span> <span class="operator">=</span>= <span class="literal">null</span></span><br></pre></td></tr></table></figure><ul><li>集合为空的话最常用的就是Spring里带的方法</li></ul><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">CollectionUtils.isEmpty(list)</span><br><span class="line">list.size() &gt; <span class="number">0</span></span><br></pre></td></tr></table></figure><ul><li>字段值为null的时候常用的是</li></ul><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Strings.isBlank(str)</span><br><span class="line">StringUtil.isEmpty(str)</span><br></pre></td></tr></table></figure><p>前两种判空我就不做讲解了，下面就是着重讲一下第三种关于一些字段的判空</p><p>一般字段为空判断的都是String类型，或者数据库字段设置默认值为null或者空字符串 这个时候我们需要对字符串做处理，例如进行正则匹配什么的，如果是null或者是空字符串的话就会有问题，有一小部分人可能习惯了isEmpty方法，但是这种情况会很容易出现空字符串的问题，这个时候系统就会报异常了。下面我来给大家看一下两个方法的区别：</p><p><strong>1.Strings.isBlank(str)</strong>  –org.apache.logging.log4j.util 包</p><p><img src="https://s1.ax1x.com/2022/09/04/vT1fFf.md.png"></p><p> 我们可以看到方法底层有两种判断方式，前面的就是我们常见的等于null判断，后面的方法我们先看一下trim()方法： <img src="https://s1.ax1x.com/2022/09/04/vT12wt.md.png"></p><p> 源码具体的作用也是对字符串的前后部分的空格做了处理，删除了字符串最前面和尾部的空格，将中间的字符串包含空格(这个空格不是前面或者后面的空格)返回。 将字符串进行trim()方法处理空格后便进行isEmpty()方法处理了:</p><p><img src="https://s1.ax1x.com/2022/09/04/vT1geI.png"></p><p> <strong>2.StringUtilS.isEmpty(str)</strong>  —org.apache.commons.lang3 包</p><p><img src="https://s1.ax1x.com/2022/09/04/vT1RTP.md.png" alt="img"></p><p>编辑 此时我们看一下apache的lang包下的判空少了个空格的处理， 由此可见我们以后再对字符串类型的字段处理的时候应该使用哪个方法都一清二楚了吧。</p><p>再补充一点：我们很多系统中都会有很多过滤条件，例如单号或者什么的也有很多是string类型的，我们在后台接收参数的时候可以先通过trim()方法将操作人误操作的前后空格给处理掉，然后再将处理后的参数放到筛选条件中进行筛选，这样保证用户的体验性。</p>]]></content>
       
       
       
@@ -237,33 +237,6 @@
     
     
     <entry>
-      <title>如何解决failed to push some refs to git</title>
-      <link href="/2022/02/17/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3failed-to-push-some-refs-to-git/"/>
-      <url>/2022/02/17/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3failed-to-push-some-refs-to-git/</url>
-      
-        <content type="html"><![CDATA[<h6 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h6><h6 id="在使用git-对源代码进行push到gitHub时可能会出错"><a href="#在使用git-对源代码进行push到gitHub时可能会出错" class="headerlink" title="在使用git 对源代码进行push到gitHub时可能会出错"></a>在使用git 对源代码进行push到gitHub时可能会出错</h6><h6 id="此时很多人会尝试下面的命令把当前分支代码上传到master分支上。"><a href="#此时很多人会尝试下面的命令把当前分支代码上传到master分支上。" class="headerlink" title="此时很多人会尝试下面的命令把当前分支代码上传到master分支上。"></a>此时很多人会尝试下面的命令把当前分支代码上传到master分支上。</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure><p>但依然没能解决问题</p><h6 id="出现错误的主要原因是github中的README-md文件不在本地代码目录中"><a href="#出现错误的主要原因是github中的README-md文件不在本地代码目录中" class="headerlink" title="出现错误的主要原因是github中的README.md文件不在本地代码目录中"></a>出现错误的主要原因是github中的README.md文件不在本地代码目录中</h6><h6 id="可以通过如下命令进行代码合并【注：pull-x3D-fetch-merge"><a href="#可以通过如下命令进行代码合并【注：pull-x3D-fetch-merge" class="headerlink" title="可以通过如下命令进行代码合并【注：pull&#x3D;fetch+merge]"></a>可以通过如下命令进行代码合并【注：pull&#x3D;fetch+merge]</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull --rebase origin master</span><br></pre></td></tr></table></figure><h6 id="执行上面代码后可以看到本地代码库中多了README-md文件"><a href="#执行上面代码后可以看到本地代码库中多了README-md文件" class="headerlink" title="执行上面代码后可以看到本地代码库中多了README.md文件"></a>执行上面代码后可以看到本地代码库中多了README.md文件</h6><h6 id="此时再执行如下语句即可完成代码上传到github"><a href="#此时再执行如下语句即可完成代码上传到github" class="headerlink" title="此时再执行如下语句即可完成代码上传到github"></a>此时再执行如下语句即可完成代码上传到github</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      <categories>
-          
-          <category> git </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 避坑 </tag>
-            
-            <tag> git </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>延时任务-基于netty时间轮算法实现</title>
       <link href="/2022/02/17/%E5%BB%B6%E6%97%B6%E4%BB%BB%E5%8A%A1-%E5%9F%BA%E4%BA%8Enetty%E6%97%B6%E9%97%B4%E8%BD%AE%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/"/>
       <url>/2022/02/17/%E5%BB%B6%E6%97%B6%E4%BB%BB%E5%8A%A1-%E5%9F%BA%E4%BA%8Enetty%E6%97%B6%E9%97%B4%E8%BD%AE%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/</url>
@@ -283,6 +256,33 @@
             <tag> netty </tag>
             
             <tag> 定时任务 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>如何解决failed to push some refs to git</title>
+      <link href="/2022/02/17/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3failed-to-push-some-refs-to-git/"/>
+      <url>/2022/02/17/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3failed-to-push-some-refs-to-git/</url>
+      
+        <content type="html"><![CDATA[<h6 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h6><h6 id="在使用git-对源代码进行push到gitHub时可能会出错"><a href="#在使用git-对源代码进行push到gitHub时可能会出错" class="headerlink" title="在使用git 对源代码进行push到gitHub时可能会出错"></a>在使用git 对源代码进行push到gitHub时可能会出错</h6><h6 id="此时很多人会尝试下面的命令把当前分支代码上传到master分支上。"><a href="#此时很多人会尝试下面的命令把当前分支代码上传到master分支上。" class="headerlink" title="此时很多人会尝试下面的命令把当前分支代码上传到master分支上。"></a>此时很多人会尝试下面的命令把当前分支代码上传到master分支上。</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure><p>但依然没能解决问题</p><h6 id="出现错误的主要原因是github中的README-md文件不在本地代码目录中"><a href="#出现错误的主要原因是github中的README-md文件不在本地代码目录中" class="headerlink" title="出现错误的主要原因是github中的README.md文件不在本地代码目录中"></a>出现错误的主要原因是github中的README.md文件不在本地代码目录中</h6><h6 id="可以通过如下命令进行代码合并【注：pull-x3D-fetch-merge"><a href="#可以通过如下命令进行代码合并【注：pull-x3D-fetch-merge" class="headerlink" title="可以通过如下命令进行代码合并【注：pull&#x3D;fetch+merge]"></a>可以通过如下命令进行代码合并【注：pull&#x3D;fetch+merge]</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull --rebase origin master</span><br></pre></td></tr></table></figure><h6 id="执行上面代码后可以看到本地代码库中多了README-md文件"><a href="#执行上面代码后可以看到本地代码库中多了README-md文件" class="headerlink" title="执行上面代码后可以看到本地代码库中多了README.md文件"></a>执行上面代码后可以看到本地代码库中多了README.md文件</h6><h6 id="此时再执行如下语句即可完成代码上传到github"><a href="#此时再执行如下语句即可完成代码上传到github" class="headerlink" title="此时再执行如下语句即可完成代码上传到github"></a>此时再执行如下语句即可完成代码上传到github</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 避坑 </tag>
+            
+            <tag> git </tag>
             
         </tags>
       
